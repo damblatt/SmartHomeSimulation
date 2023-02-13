@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace SmartHomeSimulation
 {
-    class Wohnzimmer : Zimmer
+    class Kueche : Zimmer
     {
-        public Wohnzimmer(Wohnung wohnung) : base(wohnung)
+        public Kueche(Wohnung wohnung) : base(wohnung)
         {
         }
 
-        public Wohnzimmer(Wohnung wohnung, string name, bool personImZimmer) : base(wohnung, name, personImZimmer)
+        public Kueche(Wohnung wohnung, string name, bool personImZimmer) : base(wohnung, name, personImZimmer)
         {
         }
     }
