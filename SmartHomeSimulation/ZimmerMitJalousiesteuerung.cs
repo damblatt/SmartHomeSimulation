@@ -13,12 +13,14 @@
                         Console.WriteLine($"{this.Name}: Jalousie kann nicht geschlossen werden weil Personen im Zimmer sind.");
                     } else {
                         Console.WriteLine($"{this.Name}: Jalousie wird geschlossen.");
+                        JalousieOffen = false;
                     }
                 }
             } else {
                 // Jalousie öffnen
                 if (!this.JalousieOffen) {
                     Console.WriteLine($"{this.Name}: Jalousie wird geöffnet.");
+                    JalousieOffen = true;
                 }
             }
 

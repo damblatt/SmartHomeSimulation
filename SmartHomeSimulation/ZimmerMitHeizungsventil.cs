@@ -10,11 +10,13 @@
                 // Ventil öffnen
                 if(!this.HeizungsventilOffen) {
                     Console.WriteLine($"{this.Name}: Heizungsventil wird geöffnet.");
+                    HeizungsventilOffen = true;
                 }
             } else {
                 // Ventil schliessen
                 if (this.HeizungsventilOffen) {
                     Console.WriteLine($"{this.Name}: Heizungsventil wird geschlossen.");
+                    HeizungsventilOffen= false;
                 }
             }
 

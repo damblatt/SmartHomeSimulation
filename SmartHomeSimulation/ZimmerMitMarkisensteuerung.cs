@@ -13,14 +13,17 @@
                         Console.WriteLine($"{this.Name}: Markise kann nicht geschlossen werden weils regnet.");
                     } else {
                         Console.WriteLine($"{this.Name}: Markise wird geschlossen.");
+                        MarkiseOffen = false;
                     }
                 } else if(wetterdaten.Regen) {
                     Console.WriteLine($"{this.Name}: Markise wird geöffnet weils regnet.");
+                    MarkiseOffen = true;
                 }
             } else {
                 // Markise öffnen
                 if (!this.MarkiseOffen) {
                     Console.WriteLine($"{this.Name}: Markise wird geöffnet.");
+                    MarkiseOffen = true;
                 }
             }
 

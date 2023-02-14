@@ -1,5 +1,6 @@
 ﻿namespace M320_SmartHome {
-    public class Wettersensor {
+    public class Wettersensor : IWettersensor
+    {
         private Random random;
         private double currentTemp;
         private const int MAX_TEMP = 35;
