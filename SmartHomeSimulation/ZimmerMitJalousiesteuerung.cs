@@ -3,24 +3,24 @@
         public ZimmerMitJalousiesteuerung(Zimmer zimmer) : base(zimmer) {
         }
 
-        public bool JalousieOffen { get; private set; }
+        public bool JalousieHeruntergefahren { get; private set; }
 
         public override void VerarbeiteWetterdaten(Wetterdaten wetterdaten) {
             if(wetterdaten.Aussentemperatur > this.Zimmer.Temperaturvorgabe) {
                 // Jalousie schliessen
-                if(this.JalousieOffen) {
+                if(!this.JalousieHeruntergefahren) {
                     if (this.Zimmer.PersonenImZimmer) {
                         Console.WriteLine($"{this.Name}: Jalousie kann nicht geschlossen werden weil Personen im Zimmer sind.");
                     } else {
                         Console.WriteLine($"{this.Name}: Jalousie wird geschlossen.");
-                        JalousieOffen = false;
+                        JalousieHeruntergefahren = true;
                     }
                 }
             } else {
                 // Jalousie öffnen
-                if (!this.JalousieOffen) {
+                if (this.JalousieHeruntergefahren) {
                     Console.WriteLine($"{this.Name}: Jalousie wird geöffnet.");
-                    JalousieOffen = true;
+                    JalousieHeruntergefahren = false;
                 }
             }
 

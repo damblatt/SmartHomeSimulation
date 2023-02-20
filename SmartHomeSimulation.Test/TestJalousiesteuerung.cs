@@ -6,7 +6,7 @@ namespace SmartHomeSimulation.Test
     public class TestJalousiesteuerung
     {
         [TestMethod]
-        public void ()
+        public void TestHoehereAussentemp_true()
         {
             // Arrange
             int zeitdauerMinuten = 30;
@@ -14,79 +14,80 @@ namespace SmartHomeSimulation.Test
             var wettersensor = new WettersensorMock(25, 35, true);
             var wohnung = new Wohnung(wettersensor);
 
-            wohnung.SetTemperaturvorgabe("Wintergarten", 20);
-            wohnung.SetPersonenImZimmer("Wintergarten", false);
+            wohnung.SetTemperaturvorgabe("Küche", 20);
+            wohnung.SetPersonenImZimmer("Küche", false);
 
             wohnung.GenerateWetterdaten(zeitdauerMinuten);
 
             // Act
-            var wintergarten = wohnung.GetZimmer<ZimmerMitMarkisensteuerung>("Wintergarten");
+            var kueche = wohnung.GetZimmer<ZimmerMitJalousiesteuerung>("Küche");
 
             // Assert
-            Assert.AreEqual(wintergarten.MarkiseOffen, true);
+            Assert.AreEqual(kueche.JalousieHeruntergefahren, true);
         }
 
         [TestMethod]
-        public void TestWind_false()
+        public void TestTiefereAussentemp_false()
         {
             // Arrange
             int zeitdauerMinuten = 30;
 
-            var wettersensor = new WettersensorMock(25, 35, false);
+            var wettersensor = new WettersensorMock(15, 35, true);
             var wohnung = new Wohnung(wettersensor);
 
-            wohnung.SetTemperaturvorgabe("Wintergarten", 20);
-            wohnung.SetPersonenImZimmer("Wintergarten", false);
+            wohnung.SetTemperaturvorgabe("Küche", 20);
+            wohnung.SetPersonenImZimmer("Küche", false);
 
             wohnung.GenerateWetterdaten(zeitdauerMinuten);
 
             // Act
-            var wintergarten = wohnung.GetZimmer<ZimmerMitMarkisensteuerung>("Wintergarten");
+            var kueche = wohnung.GetZimmer<ZimmerMitJalousiesteuerung>("Küche");
 
             // Assert
-            Assert.AreEqual(wintergarten.MarkiseOffen, false);
+            Assert.AreEqual(kueche.JalousieHeruntergefahren, false);
         }
 
         [TestMethod]
-        public void TestHoehereAussentemp_false()
+        public void TestPersonImRaum_false()
         {
             // Arrange
             int zeitdauerMinuten = 30;
 
-            var wettersensor = new WettersensorMock(25, 20, false);
+            var wettersensor = new WettersensorMock(25, 35, true);
             var wohnung = new Wohnung(wettersensor);
 
-            wohnung.SetTemperaturvorgabe("Wintergarten", 20);
-            wohnung.SetPersonenImZimmer("Wintergarten", false);
+            wohnung.SetTemperaturvorgabe("Küche", 20);
+            wohnung.SetPersonenImZimmer("Küche", false);
 
             wohnung.GenerateWetterdaten(zeitdauerMinuten);
 
             // Act
-            var wintergarten = wohnung.GetZimmer<ZimmerMitMarkisensteuerung>("Wintergarten");
+            var kueche = wohnung.GetZimmer<ZimmerMitJalousiesteuerung>("Küche");
 
             // Assert
-            Assert.AreEqual(wintergarten.MarkiseOffen, false);
+            Assert.AreEqual(kueche.JalousieHeruntergefahren, true);
         }
 
+        // working
         [TestMethod]
-        public void TestHoehereTempKeinWindKeinRegen_true()
+        public void TestHoehereTempPersonImRaum_false()
         {
             // Arrange
             int zeitdauerMinuten = 30;
 
-            var wettersensor = new WettersensorMock(15, 35, false);
+            var wettersensor = new WettersensorMock(25, 35, true);
             var wohnung = new Wohnung(wettersensor);
 
-            wohnung.SetTemperaturvorgabe("Wintergarten", 20);
-            wohnung.SetPersonenImZimmer("Wintergarten", false);
+            wohnung.SetTemperaturvorgabe("Küche", 20);
+            wohnung.SetPersonenImZimmer("Küche", true);
 
             wohnung.GenerateWetterdaten(zeitdauerMinuten);
 
             // Act
-            var wintergarten = wohnung.GetZimmer<ZimmerMitMarkisensteuerung>("Wintergarten");
+            var kueche = wohnung.GetZimmer<ZimmerMitJalousiesteuerung>("Küche");
 
             // Assert
-            Assert.AreEqual(wintergarten.MarkiseOffen, true);
+            Assert.AreEqual(kueche.JalousieHeruntergefahren, false);
         }
     }
 }
