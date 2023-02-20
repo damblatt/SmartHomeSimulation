@@ -18,5 +18,18 @@ namespace M320_SmartHome {
         public override void VerarbeiteWetterdaten(Wetterdaten wetterdaten) {
             Zimmer.VerarbeiteWetterdaten(wetterdaten);
         }
+
+        public T GetZimmerMitAktor<T>() where T : Zimmer
+        {
+            if (this is T)
+            {
+                return this as T;
+            }
+            if (this.Zimmer is ZimmerMitAktor)
+            {
+                return ((ZimmerMitAktor)this.Zimmer).GetZimmerMitAktor<T>();
+            }
+            return null;
+        }
     }
 }

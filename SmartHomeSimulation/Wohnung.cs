@@ -17,7 +17,7 @@ namespace M320_SmartHome {
             zimmerList = new List<Zimmer>();
             this.zimmerList.Add(new ZimmerMitHeizungsventil(new BadWC()));
             this.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Kueche())));
-            this.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Schlafen())));
+            this.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Schlafzimmer())));
             this.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitMarkisensteuerung(new Wintergarten())));
             this.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Wohnzimmer())));
         }
@@ -43,6 +43,16 @@ namespace M320_SmartHome {
             foreach(var zimmer in this.zimmerList) {
                 zimmer.VerarbeiteWetterdaten(wetterdaten);
             }
+        }
+
+        public T GetZimmer<T>(string zimmername) where T : Zimmer
+        {
+            var zimmer = this.zimmerList.FirstOrDefault(x => x.Name == zimmername);
+            if (zimmer is ZimmerMitAktor)
+            {
+                return ((ZimmerMitAktor)zimmer).GetZimmerMitAktor<T>();
+            }
+            return zimmer as T;
         }
     }
 }
