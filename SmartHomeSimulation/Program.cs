@@ -5,12 +5,6 @@
             var wettersensor = new Wettersensor();
             var wohnung = new Wohnung(wettersensor);
 
-            wohnung.zimmerList.Add(new ZimmerMitHeizungsventil(new BadWC()));
-            wohnung.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Kueche())));
-            wohnung.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Schlafzimmer())));
-            wohnung.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitMarkisensteuerung(new Wintergarten())));
-            wohnung.zimmerList.Add(new ZimmerMitJalousiesteuerung(new ZimmerMitHeizungsventil(new Wohnzimmer())));
-
             wohnung.SetTemperaturvorgabe("BadWC", 23);
             wohnung.SetTemperaturvorgabe("Küche", 22);
             wohnung.SetTemperaturvorgabe("Schlafzimmer", 19);
